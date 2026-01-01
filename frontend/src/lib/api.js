@@ -11,7 +11,11 @@ const api = axios.create({
 
 // Add auth token to requests
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('auth_token');
+  // Check for admin token first, then customer token
+  const adminToken = localStorage.getItem('admin_token');
+  const customerToken = localStorage.getItem('auth_token');
+  const token = adminToken || customerToken;
+  
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
