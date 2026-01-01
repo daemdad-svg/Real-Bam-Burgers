@@ -5,6 +5,8 @@ import { ShoppingBag, Clock, Star, Truck, ArrowRight, ChevronRight, Gift } from 
 import { Button } from '../components/ui/button';
 import { menuAPI, branchAPI } from '../lib/api';
 import { useCart } from '../context/CartContext';
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../translations';
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_755086b3-031a-49aa-b048-bf43e27751a3/artifacts/r955osxl_Logo.png";
 const BANNER_IMAGE = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200";
