@@ -98,9 +98,15 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-10">
             <div>
-              <span className="text-[#c31c1c] font-semibold text-sm tracking-wider uppercase">Popular</span>
-              <h2 className="font-bebas text-4xl sm:text-5xl text-[#1e3a5f] mt-1">Most Popular Items</h2>
-              <p className="text-slate-600 mt-2">Our customers' favorites - tried, tested, and loved by thousands</p>
+              <span className="text-[#c31c1c] font-semibold text-sm tracking-wider uppercase">
+                {t(translations.home.popular.en, translations.home.popular.ar)}
+              </span>
+              <h2 className="font-bebas text-4xl sm:text-5xl text-[#c31c1c] mt-1">
+                {t(translations.home.mostPopular.en, translations.home.mostPopular.ar)}
+              </h2>
+              <p className="text-slate-600 mt-2">
+                {t(translations.home.popularDesc.en, translations.home.popularDesc.ar)}
+              </p>
             </div>
             <Link to="/menu" className="hidden sm:block">
               <Button 
@@ -108,8 +114,8 @@ const HomePage = () => {
                 variant="outline"
                 className="rounded-full border-[#c31c1c] text-[#c31c1c] hover:bg-[#c31c1c] hover:text-white"
               >
-                View Full Menu
-                <ChevronRight className="ml-1 w-4 h-4" />
+                {t(translations.home.viewFullMenu.en, translations.home.viewFullMenu.ar)}
+                <ChevronRight className={`${language === 'ar' ? 'mr-1 rotate-180' : 'ml-1'} w-4 h-4`} />
               </Button>
             </Link>
           </div>
