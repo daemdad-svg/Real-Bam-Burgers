@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Contexts
 import { AuthProvider, useAuth } from "./context/AuthContext";
