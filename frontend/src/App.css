@@ -1,243 +1,150 @@
-/* App-specific styles */
-.App {
-  min-height: 100vh;
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Hero section specific */
-.hero-image {
-  object-fit: cover;
-  object-position: center;
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Menu card styles */
-.menu-card {
-  @apply bg-white rounded-2xl overflow-hidden transition-all duration-300;
-  @apply hover:shadow-xl hover:scale-[1.02];
+/* Bebas Neue Font for Headers */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.font-bebas {
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: 0.05em;
 }
 
-.menu-card-image {
-  @apply w-full h-48 object-cover;
+/* Loading Spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #faf2f1;
+  border-top-color: #c31c1c;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
 }
 
-/* Category pills */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Category Pills */
 .category-pill {
-  @apply px-6 py-3 rounded-full font-semibold transition-all duration-200;
-  @apply hover:scale-105 cursor-pointer;
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  border: 2px solid #e2e8f0;
+  background: white;
+  color: #64748b;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.category-pill:hover {
+  border-color: #c31c1c;
+  color: #c31c1c;
 }
 
 .category-pill.active {
-  @apply bg-[#c31c1c] text-white shadow-lg;
+  background: #c31c1c;
+  border-color: #c31c1c;
+  color: white;
 }
 
-.category-pill:not(.active) {
-  @apply bg-white text-[#1e3a5f] border border-slate-200;
-  @apply hover:border-[#c31c1c] hover:text-[#c31c1c];
+/* Menu Card */
+.menu-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Cart sidebar */
-.cart-sidebar {
-  @apply fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl z-50;
-  @apply transform transition-transform duration-300;
+.menu-card:hover {
+  transform: translateY(-4px);
 }
 
-.cart-sidebar.closed {
-  @apply translate-x-full;
+/* Admin Theme */
+.admin-theme {
+  min-height: 100vh;
+  background: #faf2f1;
 }
 
-/* Checkout steps */
-.checkout-step {
-  @apply flex items-center justify-center w-10 h-10 rounded-full;
-  @apply font-semibold transition-all duration-200;
-}
-
-.checkout-step.active {
-  @apply bg-[#c31c1c] text-white;
-}
-
-.checkout-step.completed {
-  @apply bg-green-500 text-white;
-}
-
-.checkout-step:not(.active):not(.completed) {
-  @apply bg-slate-200 text-slate-500;
-}
-
-/* Order tracking */
-.tracking-step {
-  @apply relative flex items-center;
-}
-
-.tracking-step::after {
-  content: '';
-  @apply absolute left-5 top-10 w-0.5 h-12 bg-slate-200;
-}
-
-.tracking-step:last-child::after {
-  @apply hidden;
-}
-
-.tracking-step.completed::after {
-  @apply bg-green-500;
-}
-
-.tracking-dot {
-  @apply w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0;
-  @apply transition-all duration-300;
-}
-
-.tracking-dot.active {
-  @apply bg-[#c31c1c] text-white animate-pulse;
-}
-
-.tracking-dot.completed {
-  @apply bg-green-500 text-white;
-}
-
-.tracking-dot.pending {
-  @apply bg-slate-200 text-slate-400;
-}
-
-/* Admin layout */
-.admin-layout {
-  @apply min-h-screen bg-[#f5f7fa];
-}
-
-.admin-sidebar-item {
-  @apply flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200;
-  @apply hover:bg-white/10 cursor-pointer;
-}
-
-.admin-sidebar-item.active {
-  @apply bg-[#d4af37] text-[#1e3a5f] font-semibold;
-}
-
-/* POS layout */
-.pos-grid {
-  @apply grid grid-cols-12 gap-4 h-[calc(100vh-80px)];
-}
-
-.pos-categories {
-  @apply col-span-2 overflow-y-auto;
-}
-
-.pos-items {
-  @apply col-span-6 overflow-y-auto;
-}
-
-.pos-cart {
-  @apply col-span-4 bg-white rounded-xl shadow-sm border border-slate-200;
-}
-
-/* KDS ticket */
-.kds-ticket {
-  @apply bg-white rounded-xl shadow-lg overflow-hidden;
-  @apply border-l-4 transition-all duration-300;
-}
-
-.kds-ticket.preparing {
-  @apply border-yellow-400;
-}
-
-.kds-ticket.ready {
-  @apply border-green-500;
-}
-
-.kds-ticket.delayed {
-  @apply border-red-500;
-}
-
-.kds-ticket-header {
-  @apply bg-[#1e3a5f] text-white px-4 py-3;
-}
-
-/* Receipt print */
-.receipt {
-  @apply font-mono text-sm;
-  width: 80mm;
-  max-width: 100%;
-}
-
-.receipt-header {
-  @apply text-center border-b border-dashed border-black pb-2 mb-2;
-}
-
-.receipt-item {
-  @apply flex justify-between py-1;
-}
-
-.receipt-total {
-  @apply border-t border-dashed border-black pt-2 mt-2 font-bold;
-}
-
-/* New order notification */
+/* New Order Notification */
 .new-order-notification {
-  @apply fixed inset-0 bg-black/50 flex items-center justify-center z-50;
-  animation: fadeIn 0.2s ease-out;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
 .new-order-card {
-  @apply bg-white rounded-2xl p-8 shadow-2xl max-w-md w-full mx-4;
-  animation: slideUp 0.3s ease-out;
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
-/* Map container */
-.map-container {
-  @apply w-full h-64 rounded-xl overflow-hidden border border-slate-200;
+/* Scrollbar Hide */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Form styles */
-.form-input {
-  @apply w-full px-4 py-3 rounded-xl border border-slate-200;
-  @apply focus:border-[#c31c1c] focus:ring-2 focus:ring-[#c31c1c]/20;
-  @apply transition-all duration-200 outline-none;
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
-.form-label {
-  @apply block text-sm font-semibold text-[#1e3a5f] mb-2;
+/* Leaflet Map Container */
+.leaflet-container {
+  height: 400px;
+  width: 100%;
+  border-radius: 0.75rem;
+  z-index: 0;
 }
 
-/* Badge */
-.badge {
-  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+/* Mobile Footer Fix */
+@media (max-width: 640px) {
+  body {
+    padding-bottom: 80px;
+  }
 }
 
-/* Table styles */
-.data-table {
-  @apply w-full;
+/* RTL Support */
+[dir="rtl"] .font-bebas {
+  letter-spacing: 0;
 }
 
-.data-table th {
-  @apply text-left text-sm font-semibold text-slate-500 pb-3 border-b;
+/* Language Toggle Button */
+.language-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 50;
+  background: #c31c1c;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
 }
 
-.data-table td {
-  @apply py-4 border-b border-slate-100;
+.language-toggle:hover {
+  background: #a61818;
+  transform: scale(1.05);
 }
 
-.data-table tr:hover {
-  @apply bg-slate-50;
-}
-
-/* Mobile menu */
-.mobile-nav {
-  @apply fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200;
-  @apply flex justify-around py-2 z-40 md:hidden;
-}
-
-.mobile-nav-item {
-  @apply flex flex-col items-center gap-1 p-2 text-slate-500;
-}
-
-.mobile-nav-item.active {
-  @apply text-[#c31c1c];
-}
-
-/* Quantity selector */
-.qty-selector {
-  @apply flex items-center gap-2;
-}
-
-.qty-btn {
-  @apply w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center;
-  @apply hover:bg-[#c31c1c] hover:text-white transition-colors;
+@media (max-width: 640px) {
+  .language-toggle {
+    bottom: 90px;
+  }
 }
