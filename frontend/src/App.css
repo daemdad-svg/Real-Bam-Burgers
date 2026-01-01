@@ -123,11 +123,16 @@ body {
 }
 
 /* Hide Emergent branding badge (user has standard subscription) */
-[class*="Made with Emergent"],
+#emergent-badge,
+[id*="emergent"],
 [class*="emergent-badge"],
-a[href*="emergentagent.com"][class*="badge"],
-div[style*="position: fixed"][style*="bottom"][style*="right"]:has(a[href*="emergent"]) {
+a[href*="emergentagent.com"],
+div:has(> a[id="emergent-badge"]) {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -9999 !important;
 }
 
 /* Language Toggle Button */
