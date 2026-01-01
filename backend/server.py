@@ -292,7 +292,7 @@ async def get_menu_items(category_id: Optional[str] = None, popular: Optional[bo
     items = await supabase_request("GET", "items", params)
     
     # Get modifier groups for items
-    item_modifier_groups = await supabase_request("GET", "item_modifier_groups", {"tenant_id": f"eq.{TENANT_ID}"}) or []
+    item_modifier_groups = await supabase_request("GET", "item_modifier_groups", {}) or []
     modifier_groups = await supabase_request("GET", "modifier_groups", {"tenant_id": f"eq.{TENANT_ID}", "status": "eq.active"}) or []
     modifiers = await supabase_request("GET", "modifiers", {"status": "eq.active"}) or []
     
