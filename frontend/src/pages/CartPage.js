@@ -81,8 +81,32 @@ const CartPage = () => {
         lng: mapPosition.lng
       }));
       checkDeliveryCoverage(mapPosition.lat, mapPosition.lng);
+      reverseGeocode(mapPosition.lat, mapPosition.lng);
     }
   }, [mapPosition]);
+
+  const reverseGeocode = async (lat, lng) => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&accept-language=en`
+      );
+      const data = await response.json();
+      
+      if (data && data.address) {
+        setAddressForm(prev => ({
+          ...prev,
+          address_line: data.display_name || '',
+          area: data.address.suburb || data.address.neighbourhood || data.address.city_district || '',
+          building: data.address.building || '',
+          lat: lat,
+          lng: lng
+        }));
+        toast.success('Address auto-filled from map');
+      }
+    } catch (error) {
+      console.error('Reverse geocoding error:', error);
+    }
+  };
 
   const fetchLoyaltyBalance = async () => {
     try {
