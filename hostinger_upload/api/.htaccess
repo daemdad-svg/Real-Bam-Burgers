@@ -1,0 +1,13 @@
+PassengerEnabled On
+PassengerNodejs /home/USERNAME/nodevenv/public_html/api/18/bin/node
+PassengerAppRoot /home/USERNAME/public_html/api
+PassengerStartupFile server.js
+PassengerAppType node
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /api/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ server.js [L]
+</IfModule>
