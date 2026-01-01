@@ -176,37 +176,42 @@ const Navbar = () => {
 const MobileNav = () => {
   const location = useLocation();
   const { itemCount } = useCart();
+  const { t } = useLanguage();
 
   const navItems = [
-    { icon: Home, label: 'Home', path: '/' },
-    { icon: UtensilsCrossed, label: 'Menu', path: '/menu' },
-    { icon: ShoppingBag, label: 'Cart', path: '/cart', badge: itemCount },
-    { icon: Gift, label: 'Rewards', path: '/loyalty' },
-    { icon: User, label: 'Account', path: '/login' },
+    { icon: Home, label: t('Home', 'الرئيسية'), path: '/' },
+    { icon: UtensilsCrossed, label: t('Menu', 'القائمة'), path: '/menu' },
+    { icon: ShoppingBag, label: t('Cart', 'السلة'), path: '/cart', badge: itemCount },
+    { icon: Gift, label: t('Rewards', 'المكافآت'), path: '/loyalty' },
+    { icon: User, label: t('Account', 'الحساب'), path: '/login' },
   ];
 
   return (
-    <div className="mobile-nav">
-      {navItems.map((item) => {
-        const isActive = location.pathname === item.path;
-        return (
-          <Link
-            key={item.path}
-            to={item.path}
-            className={`mobile-nav-item ${isActive ? 'active' : ''}`}
-          >
-            <div className="relative">
-              <item.icon className="w-5 h-5" />
-              {item.badge > 0 && (
-                <span className="absolute -top-2 -right-2 w-4 h-4 bg-[#c31c1c] text-white text-xs rounded-full flex items-center justify-center">
-                  {item.badge}
-                </span>
-              )}
-            </div>
-            <span className="text-xs">{item.label}</span>
-          </Link>
-        );
-      })}
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 md:hidden z-40">
+      <div className="flex items-center justify-around py-2">
+        {navItems.map((item) => {
+          const isActive = location.pathname === item.path;
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`flex flex-col items-center gap-1 px-3 py-2 transition-colors ${
+                isActive ? 'text-[#c31c1c]' : 'text-slate-500'
+              }`}
+            >
+              <div className="relative">
+                <item.icon className="w-5 h-5" />
+                {item.badge > 0 && (
+                  <span className="absolute -top-2 -right-2 w-4 h-4 bg-[#c31c1c] text-white text-xs rounded-full flex items-center justify-center">
+                    {item.badge}
+                  </span>
+                )}
+              </div>
+              <span className="text-xs">{item.label}</span>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 };
