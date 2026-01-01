@@ -282,12 +282,12 @@ const POSPage = () => {
 
           {/* Aggregator Selector */}
           <div className="mt-3">
-            <Select value={aggregator} onValueChange={setAggregator}>
+            <Select value={aggregator || "website"} onValueChange={(val) => setAggregator(val === "website" ? "" : val)}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Channel (Optional)" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Website / Walk-in</SelectItem>
+                <SelectItem value="website">Website / Walk-in</SelectItem>
                 <SelectItem value="talabat">Talabat</SelectItem>
                 <SelectItem value="keeta">Keeta</SelectItem>
                 <SelectItem value="jahez">Jahez</SelectItem>
