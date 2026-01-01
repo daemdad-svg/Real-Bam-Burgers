@@ -1,9 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, UtensilsCrossed, ShoppingBag, Gift, User, Menu, X, Phone } from 'lucide-react';
+import { Home, UtensilsCrossed, ShoppingBag, Gift, User, Menu, X, Phone, Languages } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
+import { useLanguage } from '@/context/LanguageContext';
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_755086b3-031a-49aa-b048-bf43e27751a3/artifacts/r955osxl_Logo.png";
 
