@@ -203,9 +203,9 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
-          <div>
-            <span className="font-bebas text-3xl">BAM BURGERS</span>
-            <p className="text-white/70 mt-2">Fresh. Fast. Flavorful.</p>
+          <div className="flex items-center gap-3">
+            <img src={LOGO_URL} alt="Bam Burgers" className="h-8 w-auto" />
+            <span className="font-bebas text-3xl text-white">BAM BURGERS</span>
           </div>
 
           {/* Links */}
