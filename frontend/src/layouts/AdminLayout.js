@@ -59,7 +59,11 @@ export const AdminLayout = ({ children }) => {
                     <Link
                       to={item.path}
                       onClick={() => setSidebarOpen(false)}
-                      className={`admin-sidebar-item ${isActive ? 'active' : ''}`}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all ${
+                        isActive 
+                          ? 'bg-white text-[#c31c1c] font-semibold' 
+                          : 'text-white/70 hover:bg-white/10 hover:text-white'
+                      }`}
                       data-testid={`nav-${item.label.toLowerCase()}`}
                     >
                       <item.icon className="w-5 h-5" />
