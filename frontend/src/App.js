@@ -191,27 +191,29 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <AuthProvider>
-          <AdminAuthProvider>
-            <Routes>
-              {/* Admin routes */}
-              <Route path="/admin/*" element={<AdminRoutes />} />
+        <LanguageProvider>
+          <AuthProvider>
+            <AdminAuthProvider>
+              <Routes>
+                {/* Admin routes */}
+                <Route path="/admin/*" element={<AdminRoutes />} />
+                
+                {/* Customer routes */}
+                <Route path="/*" element={<CustomerRoutes />} />
+              </Routes>
               
-              {/* Customer routes */}
-              <Route path="/*" element={<CustomerRoutes />} />
-            </Routes>
-            
-            {/* Global Toast */}
-            <Toaster 
-              position="top-right" 
-              richColors 
-              closeButton
-              toastOptions={{
-                duration: 3000,
-              }}
-            />
-          </AdminAuthProvider>
-        </AuthProvider>
+              {/* Global Toast */}
+              <Toaster 
+                position="top-right" 
+                richColors 
+                closeButton
+                toastOptions={{
+                  duration: 3000,
+                }}
+              />
+            </AdminAuthProvider>
+          </AuthProvider>
+        </LanguageProvider>
       </BrowserRouter>
     </div>
   );
