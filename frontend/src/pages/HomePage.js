@@ -16,6 +16,7 @@ const HomePage = () => {
   const [branches, setBranches] = useState([]);
   const [loading, setLoading] = useState(true);
   const { setBranch, setOrderType } = useCart();
+  const { language, t } = useLanguage();
 
   useEffect(() => {
     const fetchData = async () => {
