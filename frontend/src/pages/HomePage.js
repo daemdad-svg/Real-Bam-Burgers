@@ -228,25 +228,29 @@ const HomePage = () => {
       </section>
 
       {/* Loyalty Section */}
-      <section className="py-16 bg-[#1e3a5f]">
+      <section className="py-16 bg-[#c31c1c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center gap-6">
-              <div className="w-20 h-20 bg-[#d4af37] rounded-2xl flex items-center justify-center flex-shrink-0">
-                <Gift className="w-10 h-10 text-white" />
+              <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center flex-shrink-0">
+                <Gift className="w-10 h-10 text-[#c31c1c]" />
               </div>
               <div>
-                <h2 className="font-bebas text-3xl sm:text-4xl text-white">Loyalty Program</h2>
-                <p className="text-white/80 mt-1">Earn points with every order and unlock exclusive rewards!</p>
+                <h2 className="font-bebas text-3xl sm:text-4xl text-white">
+                  {t(translations.home.loyaltyProgram.en, translations.home.loyaltyProgram.ar)}
+                </h2>
+                <p className="text-white/80 mt-1">
+                  {t(translations.home.loyaltyProgramDesc.en, translations.home.loyaltyProgramDesc.ar)}
+                </p>
               </div>
             </div>
             <Link to="/loyalty">
               <Button 
                 data-testid="join-loyalty-btn"
-                className="bg-[#d4af37] hover:bg-[#c49f2f] text-[#1e3a5f] rounded-full px-8 py-6 font-bebas text-xl tracking-wide"
+                className="bg-white hover:bg-white/90 text-[#c31c1c] rounded-full px-8 py-6 font-bebas text-xl tracking-wide"
               >
-                Join Now
-                <ArrowRight className="ml-2 w-5 h-5" />
+                {t(translations.home.joinNow.en, translations.home.joinNow.ar)}
+                <ArrowRight className={`${language === 'ar' ? 'mr-2 rotate-180' : 'ml-2'} w-5 h-5`} />
               </Button>
             </Link>
           </div>
@@ -256,25 +260,29 @@ const HomePage = () => {
       {/* CTA Section */}
       <section className="py-16 sm:py-24 bg-[#faf2f1]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-bebas text-4xl sm:text-5xl text-[#1e3a5f] mb-4">Ready to Order?</h2>
-          <p className="text-slate-600 text-lg mb-8">Order now and get fast delivery right to your doorstep</p>
+          <h2 className="font-bebas text-4xl sm:text-5xl text-[#c31c1c] mb-4">
+            {t(translations.home.readyToOrder.en, translations.home.readyToOrder.ar)}
+          </h2>
+          <p className="text-slate-600 text-lg mb-8">
+            {t(translations.home.readyToOrderDesc.en, translations.home.readyToOrderDesc.ar)}
+          </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/menu">
               <Button 
                 data-testid="cta-order-now-btn"
                 className="bg-[#c31c1c] hover:bg-[#a61818] rounded-full px-8 py-6 font-bebas text-xl tracking-wide"
               >
-                Order Now
-                <ArrowRight className="ml-2 w-5 h-5" />
+                {t(translations.home.orderNow.en, translations.home.orderNow.ar)}
+                <ArrowRight className={`${language === 'ar' ? 'mr-2 rotate-180' : 'ml-2'} w-5 h-5`} />
               </Button>
             </Link>
             <a href="tel:+96594745424">
               <Button 
                 data-testid="call-btn"
                 variant="outline"
-                className="rounded-full border-[#1e3a5f] text-[#1e3a5f] px-8 py-6 font-bebas text-xl tracking-wide"
+                className="rounded-full border-[#c31c1c] text-[#c31c1c] px-8 py-6 font-bebas text-xl tracking-wide hover:bg-[#c31c1c] hover:text-white"
               >
-                +965 9474 5424
+                {t(translations.home.phone.en, translations.home.phone.ar)}
               </Button>
             </a>
           </div>
