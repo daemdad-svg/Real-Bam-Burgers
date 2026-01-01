@@ -1,0 +1,162 @@
+{
+  "brand_identity": {
+    "name": "BAM Burgers",
+    "mission": "Bold flavors, fast service, unforgettable experiences.",
+    "tone": {
+      "customer": "Energetic, Crave-inducing, Loud, Fun",
+      "admin": "Efficient, Reliable, Clear, Enterprise-Grade"
+    },
+    "typography": {
+      "headings": {
+        "family": "Bebas Neue, sans-serif",
+        "usage": "All section titles, hero text, product names",
+        "import_url": "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700&display=swap"
+      },
+      "body": {
+        "family": "Manrope, sans-serif",
+        "usage": "Descriptions, prices, UI elements, admin interface"
+      }
+    }
+  },
+  "colors": {
+    "customer_site": {
+      "primary": "#c31c1c",
+      "primary_foreground": "#ffffff",
+      "secondary": "#faf2f1",
+      "secondary_foreground": "#1e3a5f",
+      "accent": "#d4af37",
+      "accent_foreground": "#000000",
+      "background": "#faf2f1",
+      "foreground": "#1e3a5f",
+      "card": "#ffffff",
+      "card_foreground": "#1e3a5f",
+      "border": "#e2e8f0",
+      "input": "#ffffff",
+      "ring": "#c31c1c"
+    },
+    "admin_panel": {
+      "primary": "#1e3a5f",
+      "primary_foreground": "#ffffff",
+      "secondary": "#a8c5e6",
+      "secondary_foreground": "#1e3a5f",
+      "accent": "#d4af37",
+      "accent_foreground": "#ffffff",
+      "background": "#f5f7fa",
+      "foreground": "#0f172a",
+      "card": "#ffffff",
+      "card_foreground": "#0f172a",
+      "border": "#e2e8f0",
+      "input": "#ffffff",
+      "ring": "#1e3a5f",
+      "kds_station": {
+        "preparing": "#fbbf24",
+        "ready": "#22c55e",
+        "delayed": "#ef4444"
+      }
+    }
+  },
+  "layout_strategies": {
+    "customer_website": {
+      "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+      "spacing": "Generous padding (py-16, py-24) to let food images breathe.",
+      "hero_section": {
+        "height": "min-h-[60vh]",
+        "layout": "Split screen (Text Left, Image Right) or Centered on Mobile",
+        "elements": "Massive 'OG BURGER MEAL' text (text-7xl+), CTA 'Order Now', Hero Image"
+      },
+      "menu_grid": "Bento-style grid. Featured items span 2 cols. Standard items 1 col.",
+      "navbar": "Sticky, glassmorphism effect (bg-white/80 backdrop-blur-md). Logo left, Cart right."
+    },
+    "admin_panel": {
+      "layout": "Sidebar Navigation (Fixed Left) + Main Content Area (Scrollable)",
+      "pos_mode": "3-Column Grid: Categories (Left, Narrow) | Items (Middle, Wide) | Cart/Ticket (Right, Fixed)",
+      "kds_mode": "Masonry or Strict Grid of Tickets. High contrast headers. Auto-sizing based on screen width."
+    }
+  },
+  "component_styles": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 py-6 text-xl font-bebas tracking-wide shadow-lg hover:shadow-xl transition-all active:scale-95",
+      "secondary": "bg-white text-primary border-2 border-primary hover:bg-primary/5 rounded-full px-8 py-6 text-xl font-bebas tracking-wide",
+      "admin_action": "bg-primary text-white rounded-md px-4 py-2 text-sm font-medium shadow-sm hover:bg-primary/90"
+    },
+    "cards": {
+      "product": "bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-transparent hover:border-primary/20 overflow-hidden group",
+      "admin_widget": "bg-white rounded-xl shadow-sm border border-slate-200 p-6"
+    },
+    "inputs": {
+      "style": "rounded-lg border-slate-200 focus:border-primary focus:ring-primary bg-white/50 backdrop-blur-sm"
+    }
+  },
+  "visual_assets": {
+    "images": {
+      "hero_burger": "https://images.unsplash.com/photo-1603508102983-99b101395d1a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxqdWljeSUyMGdvdXJtZXQlMjBidXJnZXIlMjBibGFjayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY3MjU5ODY1fDA&ixlib=rb-4.1.0&q=85",
+      "menu_items": [
+        {
+          "name": "Classic Burger",
+          "url": "https://images.unsplash.com/photo-1585238341710-4d3ff484184d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxqdWljeSUyMGdvdXJtZXQlMjBidXJnZXIlMjBibGFjayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY3MjU5ODY1fDA&ixlib=rb-4.1.0&q=85",
+          "category": "Burgers"
+        },
+        {
+          "name": "Spicy Chicken",
+          "url": "https://images.unsplash.com/photo-1552377419-5dd8980729e1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHw0fHxqdWljeSUyMGdvdXJtZXQlMjBidXJnZXIlMjBibGFjayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY3MjU5ODY1fDA&ixlib=rb-4.1.0&q=85",
+          "category": "Burgers"
+        },
+        {
+          "name": "Fries Basket",
+          "url": "https://images.unsplash.com/photo-1760304342164-1445321e6048?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxjcmlzcHklMjBmcmVuY2glMjBmcmllcyUyMGJhc2tldHxlbnwwfHx8fDE3NjcyNTk4Njd8MA&ixlib=rb-4.1.0&q=85",
+          "category": "Sides"
+        },
+        {
+          "name": "Cola",
+          "url": "https://images.unsplash.com/photo-1534260164206-2a3a4a72891d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxyZWZyZXNoaW5nJTIwY29sYSUyMGRyaW5rJTIwZ2xhc3MlMjBpY2V8ZW58MHx8fHwxNzY3MjU5ODY4fDA&ixlib=rb-4.1.0&q=85",
+          "category": "Drinks"
+        }
+      ],
+      "community": "https://images.unsplash.com/photo-1598869976751-91c761fe84c7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGZhbWlseSUyMGVhdGluZyUyMGJ1cmdlcnMlMjByZXN0YXVyYW50fGVufDB8fHx8MTc2NzI1OTg3MHww&ixlib=rb-4.1.0&q=85"
+    },
+    "icons": {
+      "library": "lucide-react",
+      "usage": "Use stroke-width={1.5} for elegant look. Use fill-current for solid icons."
+    }
+  },
+  "motion_guidelines": {
+    "hover_effects": "Scale up 1.02 on hover for cards. Buttons lift -2px.",
+    "page_transitions": "Fade in + Slide up (y: 20 -> 0, opacity: 0 -> 1) duration-500.",
+    "micro_interactions": "Heart icon pulse on click. Cart icon shake on add."
+  },
+  "accessibility_rules": {
+    "contrast": "Ensure text on red buttons is white. Text on light backgrounds must be dark navy (#1e3a5f).",
+    "focus_states": "Visible ring-2 ring-offset-2 ring-primary for keyboard navigation.",
+    "aria_labels": "Required for all icon-only buttons (e.g., Cart, Close, Menu)."
+  },
+  "instructions_to_main_agent": [
+    "1. INSTALL FONTS: Add the Google Fonts import to index.css immediately.",
+    "2. CONFIGURE TAILWIND: Update tailwind.config.js with the specific color palettes for 'customer' and 'admin' (use CSS variables or distinct classes).",
+    "3. SCAFFOLD LAYOUTS: Create separate layouts for 'CustomerLayout' (Navbar+Footer) and 'AdminLayout' (Sidebar+Header).",
+    "4. BUILD HERO: Implement the 60vh Hero with the 'OG BURGER MEAL' text and the specific burger image provided.",
+    "5. POS & KDS: These are complex. Focus on the GRID layout. POS needs to be touch-friendly (large tap targets).",
+    "6. MAPS: Use 'leaflet' or 'react-leaflet' for the OpenStreetMap integration as requested.",
+    "7. TESTING: Add data-testid to all interactive elements (buttons, inputs, cards)."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy",
+    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+    "You MUST NOT apply universal transition. Eg: transition: all. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms",
+    "You MUST NOT center align the app container, ie do not add .App { text-align: center; } in the css file. This disrupts the human natural reading flow of text",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯📚🎭🎬🎪🎉🎊🎁🎀🎂🍰🎈🎨🎰💰💵💳🏦💎🪙💸🤑📊📈📉💹🔢🏆🥇 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "Main agent relies on these image URLs. Missing categories (especially sponsor logos) = main agent will use placeholder text which is FORBIDDEN",
+    "Prioritize using pre-existing components from src/components/ui when applicable",
+    "Create new components that match the style and conventions of existing components when needed",
+    "Examine existing components to understand the project's component patterns before creating new ones",
+    "Components MUST use named exports (export const ComponentName = ...)",
+    "Pages MUST use default exports (export default function PageName() {...})",
+    "Use sonner for toasts",
+    "Sonner component are located in /app/src/components/ui/sonner.tsx"
+  ]
+}
