@@ -9,12 +9,24 @@ import { useLanguage } from '@/context/LanguageContext';
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_755086b3-031a-49aa-b048-bf43e27751a3/artifacts/r955osxl_Logo.png";
 
 export const CustomerLayout = ({ children }) => {
+  const { toggleLanguage, t, language } = useLanguage();
+  
   return (
     <div className="min-h-screen bg-[#faf2f1]">
       <Navbar />
-      <main>{children}</main>
+      <main className="pb-20 md:pb-0">{children}</main>
       <MobileNav />
       <Footer />
+      
+      {/* Language Toggle Button */}
+      <button
+        onClick={toggleLanguage}
+        className="language-toggle"
+        aria-label="Toggle Language"
+      >
+        <Languages className="w-5 h-5 inline mr-2" />
+        {language === 'en' ? 'عربي' : 'English'}
+      </button>
     </div>
   );
 };
