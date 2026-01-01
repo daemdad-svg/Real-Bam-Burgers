@@ -1,0 +1,312 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║          HOSTINGER DEPLOYMENT - MANUAL RESTRUCTURING GUIDE                     ║
+║              (Follow these steps AFTER downloading from Emergent)              ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+PROBLEM: Hostinger only detects "frontend" folder and deployment shows white screen
+SOLUTION: Restructure so frontend is at root level and backend is in /api subfolder
+
+════════════════════════════════════════════════════════════════════════════════
+METHOD 1: USING AUTOMATED SCRIPT (EASIEST - Mac/Linux)
+════════════════════════════════════════════════════════════════════════════════
+
+Step 1: Download code from Emergent
+Step 2: Extract the ZIP file
+Step 3: Open Terminal and navigate to extracted folder:
+        cd path/to/extracted-folder
+
+Step 4: Make script executable:
+        chmod +x RESTRUCTURE_FOR_HOSTINGER.sh
+
+Step 5: Run the script:
+        ./RESTRUCTURE_FOR_HOSTINGER.sh
+
+Step 6: Wait for completion (2-5 minutes)
+Step 7: Follow instructions in: deployment/DEPLOY_TO_HOSTINGER.txt
+
+════════════════════════════════════════════════════════════════════════════════
+METHOD 2: MANUAL RESTRUCTURING (Windows or if script doesn't work)
+════════════════════════════════════════════════════════════════════════════════
+
+STEP A: BUILD FRONTEND
+──────────────────────────────────────────────────────────────────────────────
+
+1. Download and extract code from Emergent
+
+2. Open Command Prompt/Terminal
+
+3. Navigate to frontend folder:
+   cd frontend
+
+4. Install dependencies:
+   yarn install
+   (If you don't have yarn: npm install -g yarn)
+
+5. Build production version:
+   yarn build
+
+6. Wait for build to complete (you'll see a "build" folder created)
+
+──────────────────────────────────────────────────────────────────────────────
+STEP B: CREATE NEW FOLDER STRUCTURE
+──────────────────────────────────────────────────────────────────────────────
+
+1. In the main folder (where you have frontend/ and backend/), create:
+   - New folder named: "deployment"
+
+2. Inside "deployment", create:
+   - Subfolder named: "api"
+
+Your structure should look like:
+📁 extracted-folder/
+  📁 frontend/
+  📁 backend/
+  📁 deployment/  ← NEW
+    📁 api/       ← NEW
+
+──────────────────────────────────────────────────────────────────────────────
+STEP C: MOVE FILES TO NEW STRUCTURE
+──────────────────────────────────────────────────────────────────────────────
+
+1. Copy ALL contents from frontend/build/ to deployment/
+   (NOT the "build" folder itself, just its contents!)
+   
+   Copy these files/folders to deployment/:
+   ✓ index.html
+   ✓ asset-manifest.json
+   ✓ favicon.ico
+   ✓ manifest.json
+   ✓ robots.txt
+   ✓ static/ (entire folder)
+
+2. Copy ALL files from backend/ to deployment/api/
+   
+   Copy these to deployment/api/:
+   ✓ server.py
+   ✓ requirements.txt
+   ✓ .env
+   ✓ (all other backend files)
+
+──────────────────────────────────────────────────────────────────────────────
+STEP D: CREATE CONFIGURATION FILES
+──────────────────────────────────────────────────────────────────────────────
+
+FILE 1: deployment/.htaccess
+─────────────────────────────
+Create a new file named ".htaccess" in the deployment/ folder.
+Paste this content:
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !^/api
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+
+FILE 2: deployment/api/.htaccess
+─────────────────────────────────
+Create ".htaccess" file in deployment/api/ folder.
+Paste this content:
+
+PassengerEnabled On
+PassengerPython /home/uXXXXXXXXX/public_html/api/venv/bin/python3
+PassengerAppRoot /home/uXXXXXXXXX/public_html/api
+
+RewriteEngine On
+RewriteBase /api/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ passenger_wsgi.py/$1 [QSA,L]
+
+NOTE: Replace uXXXXXXXXX with your actual Hostinger username later!
+
+
+FILE 3: deployment/api/passenger_wsgi.py
+─────────────────────────────────────────
+Create "passenger_wsgi.py" in deployment/api/ folder.
+Paste this content:
+
+import sys
+import os
+
+INTERP = "/home/uXXXXXXXXX/public_html/api/venv/bin/python3"
+if sys.executable != INTERP:
+    os.execl(INTERP, INTERP, *sys.argv)
+
+sys.path.insert(0, os.path.dirname(__file__))
+
+from server import app as application
+
+NOTE: Replace uXXXXXXXXX with your actual Hostinger username later!
+
+──────────────────────────────────────────────────────────────────────────────
+STEP E: UPDATE ENVIRONMENT VARIABLES
+──────────────────────────────────────────────────────────────────────────────
+
+Edit: deployment/api/.env
+
+Update these lines:
+MONGO_URL=mongodb+srv://your_user:your_password@cluster.mongodb.net/bam_burgers
+CORS_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+
+(Replace with your actual MongoDB connection string and domain)
+
+════════════════════════════════════════════════════════════════════════════════
+FINAL FOLDER STRUCTURE (What you'll upload to Hostinger)
+════════════════════════════════════════════════════════════════════════════════
+
+📁 deployment/  ← UPLOAD ALL CONTENTS TO HOSTINGER public_html/
+  📄 index.html
+  📄 asset-manifest.json
+  📄 favicon.ico
+  📄 manifest.json
+  📄 robots.txt
+  📄 .htaccess
+  📁 static/
+    📁 css/
+    📁 js/
+    📁 media/
+  📁 api/
+    📄 server.py
+    📄 requirements.txt
+    📄 .env
+    📄 .htaccess
+    📄 passenger_wsgi.py
+    📄 (other backend files)
+
+════════════════════════════════════════════════════════════════════════════════
+UPLOAD TO HOSTINGER
+════════════════════════════════════════════════════════════════════════════════
+
+1. Login to Hostinger: https://hpanel.hostinger.com
+
+2. Go to: Files → File Manager
+
+3. Navigate to: public_html/
+
+4. DELETE all existing files (index.html, etc.)
+
+5. Upload ALL contents from your "deployment" folder:
+   - Select all files and folders inside deployment/
+   - Click "Upload"
+   - Wait for completion
+
+6. Your structure on Hostinger should be:
+   public_html/
+     index.html
+     static/
+     api/
+     .htaccess
+     (etc.)
+
+════════════════════════════════════════════════════════════════════════════════
+SETUP BACKEND VIA SSH
+════════════════════════════════════════════════════════════════════════════════
+
+1. Enable SSH in hPanel:
+   Advanced → SSH Access → Enable
+
+2. Note your SSH username (e.g., u123456789)
+
+3. Connect via SSH:
+   Windows (use PuTTY):
+     Host: ssh.hostinger.com
+     Port: 65002
+   
+   Mac/Linux (Terminal):
+     ssh u123456789@ssh.hostinger.com -p 65002
+
+4. After connecting, run these commands:
+
+   cd ~/public_html/api
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install --upgrade pip
+   pip install -r requirements.txt
+
+5. Get your username:
+   whoami
+
+6. Update files with your username:
+   
+   Edit .htaccess:
+   nano .htaccess
+   (Replace uXXXXXXXXX with your actual username)
+   Save: Ctrl+O, Enter, Ctrl+X
+   
+   Edit passenger_wsgi.py:
+   nano passenger_wsgi.py
+   (Replace uXXXXXXXXX with your actual username)
+   Save: Ctrl+O, Enter, Ctrl+X
+
+════════════════════════════════════════════════════════════════════════════════
+TEST DEPLOYMENT
+════════════════════════════════════════════════════════════════════════════════
+
+1. Backend API:
+   https://yourdomain.com/api/health
+   Should show: {"status":"healthy","timestamp":"..."}
+
+2. Frontend:
+   https://yourdomain.com
+   Should show BAM Burgers homepage
+
+3. Admin Panel:
+   https://yourdomain.com/admin
+   Login: admin / admin123
+
+4. Seed Data:
+   https://yourdomain.com/api/seed
+
+════════════════════════════════════════════════════════════════════════════════
+COMMON ISSUES & SOLUTIONS
+════════════════════════════════════════════════════════════════════════════════
+
+❌ White screen on website
+✓ Solution: Check browser console (F12), verify .htaccess in root
+
+❌ Backend 500 error
+✓ Solution: Check error logs (hPanel → Advanced → Error Logs)
+           Verify MongoDB connection string in api/.env
+           Ensure requirements.txt installed
+
+❌ API not working
+✓ Solution: Verify .htaccess in api/ has correct username
+           Check passenger_wsgi.py has correct username
+
+❌ Admin panel not showing
+✓ Solution: Visit /api/seed to seed initial data
+           Clear browser cache (Ctrl+Shift+R)
+
+════════════════════════════════════════════════════════════════════════════════
+✓ YOU'RE DONE!
+════════════════════════════════════════════════════════════════════════════════
+
+Your application should now be fully deployed on Hostinger with:
+✓ Frontend at root (/)
+✓ Backend at /api
+✓ Admin panel at /admin
+✓ All features working
+
+Remember to change the default admin password after first login!
