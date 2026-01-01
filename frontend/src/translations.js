@@ -28,6 +28,18 @@ export const translations = {
     mostPopular: { en: 'MOST POPULAR ITEMS', ar: 'الأصناف الأكثر طلباً' },
     popularDesc: { en: "Our customers' favorites - tried, tested, and loved by thousands", ar: 'المفضلة لدى عملائنا - مجربة ومختبرة ومحبوبة من الآلاف' },
     viewFullMenu: { en: 'View Full Menu', ar: 'عرض القائمة الكاملة' },
+    fastDelivery: { en: 'Fast Delivery', ar: 'توصيل سريع' },
+    fastDeliveryDesc: { en: 'Hot and fresh food delivered to your doorstep in 30 minutes or less', ar: 'طعام ساخن وطازج يصل إلى باب منزلك في 30 دقيقة أو أقل' },
+    bestQuality: { en: 'Best Quality', ar: 'أفضل جودة' },
+    bestQualityDesc: { en: 'Premium ingredients and recipes crafted to perfection by our chefs', ar: 'مكونات ممتازة ووصفات مصنوعة بإتقان من قبل طهاتنا' },
+    openLate: { en: 'Open Late', ar: 'مفتوح لوقت متأخر' },
+    openLateDesc: { en: "Craving food at night? We're open until 1 AM daily", ar: 'تشتهي الطعام في الليل؟ نحن مفتوحون حتى الساعة 1 صباحاً يومياً' },
+    loyaltyProgram: { en: 'Loyalty Program', ar: 'برنامج الولاء' },
+    loyaltyProgramDesc: { en: 'Earn points with every order and unlock exclusive rewards!', ar: 'اكسب نقاطاً مع كل طلب واحصل على مكافآت حصرية!' },
+    joinNow: { en: 'Join Now', ar: 'انضم الآن' },
+    readyToOrder: { en: 'Ready to Order?', ar: 'جاهز للطلب؟' },
+    readyToOrderDesc: { en: 'Order now and get fast delivery right to your doorstep', ar: 'اطلب الآن واحصل على توصيل سريع إلى باب منزلك' },
+    phone: { en: '+965 9474 5424', ar: '+965 9474 5424' },
   },
 
   // Menu Page
