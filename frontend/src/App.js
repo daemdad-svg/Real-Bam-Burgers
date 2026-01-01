@@ -27,6 +27,7 @@ import POSPage from "./pages/admin/POSPage";
 import KDSPage from "./pages/admin/KDSPage";
 import MenuManagementPage from "./pages/admin/MenuManagementPage";
 import ReportsPage from "./pages/admin/ReportsPage";
+import CouponsPage from "./pages/admin/CouponsPage";
 
 // API
 import { seedAPI } from "./lib/api";
