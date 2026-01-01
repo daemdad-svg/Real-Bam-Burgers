@@ -217,8 +217,10 @@ const MobileNav = () => {
 };
 
 const Footer = () => {
+  const { t } = useLanguage();
+  
   return (
-    <footer className="bg-[#1e3a5f] text-white py-12 hidden md:block">
+    <footer className="bg-[#c31c1c] text-white py-12 mt-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
@@ -229,39 +231,39 @@ const Footer = () => {
 
           {/* Links */}
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <h4 className="font-semibold mb-4">{t('Quick Links', 'روابط سريعة')}</h4>
             <ul className="space-y-2">
-              <li><Link to="/menu" className="text-white/70 hover:text-white">Menu</Link></li>
-              <li><Link to="/loyalty" className="text-white/70 hover:text-white">Rewards</Link></li>
-              <li><Link to="/track" className="text-white/70 hover:text-white">Track Order</Link></li>
+              <li><Link to="/menu" className="text-white/70 hover:text-white">{t('Menu', 'القائمة')}</Link></li>
+              <li><Link to="/loyalty" className="text-white/70 hover:text-white">{t('Rewards', 'المكافآت')}</Link></li>
+              <li><Link to="/track" className="text-white/70 hover:text-white">{t('Track Order', 'تتبع الطلب')}</Link></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
+            <h4 className="font-semibold mb-4">{t('Contact', 'اتصل بنا')}</h4>
             <ul className="space-y-2 text-white/70">
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
                 +965 9474 5424
               </li>
-              <li>Kitchen Park Salwa</li>
-              <li>Kuwait</li>
+              <li>{t('Kitchen Park Salwa', 'كيتشن بارك الصالحية')}</li>
+              <li>{t('Kuwait', 'الكويت')}</li>
             </ul>
           </div>
 
           {/* Hours */}
           <div>
-            <h4 className="font-semibold mb-4">Opening Hours</h4>
+            <h4 className="font-semibold mb-4">{t('Opening Hours', 'ساعات العمل')}</h4>
             <ul className="space-y-1 text-white/70">
-              <li>Sunday - Thursday: 11am - 1am</li>
-              <li>Friday - Saturday: 11am - 2am</li>
+              <li>{t('Sunday - Thursday: 11am - 1am', 'الأحد - الخميس: 11 صباحاً - 1 صباحاً')}</li>
+              <li>{t('Friday - Saturday: 11am - 2am', 'الجمعة - السبت: 11 صباحاً - 2 صباحاً')}</li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/10 text-center text-white/50">
-          <p>© 2025 BAM Burgers. All rights reserved.</p>
+        <div className="mt-12 pt-8 border-t border-white/10 text-center text-white/70">
+          <p>© 2025 BAM Burgers. {t('All rights reserved', 'جميع الحقوق محفوظة')}.</p>
         </div>
       </div>
     </footer>
