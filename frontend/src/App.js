@@ -129,10 +129,7 @@ const AdminRoutes = () => {
         element={
           <AdminProtectedRoute>
             <AdminLayout>
-              <div className="p-6">
-                <h1 className="font-bebas text-4xl text-[#1e3a5f] mb-4">Coupons</h1>
-                <p className="text-slate-500">Coupon management coming soon...</p>
-              </div>
+              <CouponsPage />
             </AdminLayout>
           </AdminProtectedRoute>
         }
