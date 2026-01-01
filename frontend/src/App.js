@@ -192,6 +192,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ScrollToTop />
         <LanguageProvider>
           <AuthProvider>
             <AdminAuthProvider>
