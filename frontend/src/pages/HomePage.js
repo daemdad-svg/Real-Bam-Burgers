@@ -149,10 +149,16 @@ const HomePage = () => {
                         )}
                       </div>
                       <div className="p-4">
-                        <h3 className="font-bebas text-xl text-[#1e3a5f]">{item.name}</h3>
-                        <p className="text-slate-500 text-sm mt-1 line-clamp-2">{item.description}</p>
+                        <h3 className="font-bebas text-xl text-[#c31c1c]">
+                          {language === 'ar' && item.name_ar ? item.name_ar : item.name}
+                        </h3>
+                        <p className="text-slate-500 text-sm mt-1 line-clamp-2">
+                          {language === 'ar' && item.description_ar ? item.description_ar : item.description}
+                        </p>
                         <div className="flex items-center justify-between mt-4">
-                          <span className="font-bold text-lg text-[#c31c1c]">{item.price.toFixed(3)} KWD</span>
+                          <span className="font-bold text-lg text-[#c31c1c]">
+                            {item.price.toFixed(3)} {t(translations.common.kwd.en, translations.common.kwd.ar)}
+                          </span>
                           <Button 
                             size="sm"
                             className="bg-[#c31c1c] hover:bg-[#a61818] rounded-full"
