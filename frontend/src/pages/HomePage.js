@@ -64,10 +64,10 @@ const HomePage = () => {
             className="max-w-2xl"
           >
             <h1 className="font-bebas text-6xl sm:text-7xl lg:text-8xl text-white tracking-wide leading-none mb-6">
-              OG BURGER<br />MEAL
+              {t(translations.home.title.en, translations.home.title.ar)}
             </h1>
             <p className="text-white/90 text-lg sm:text-xl mb-8 font-manrope">
-              Fresh ingredients, bold flavors, and quick delivery. Experience the best burgers in Kuwait with Bam Burgers.
+              {t(translations.home.subtitle.en, translations.home.subtitle.ar)}
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/menu">
@@ -75,8 +75,8 @@ const HomePage = () => {
                   data-testid="hero-order-now-btn"
                   className="bg-white text-[#c31c1c] hover:bg-white/90 rounded-full px-8 py-6 text-xl font-bebas tracking-wide shadow-lg hover:shadow-xl transition-all active:scale-95"
                 >
-                  Order Now
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  {t(translations.home.orderNow.en, translations.home.orderNow.ar)}
+                  <ArrowRight className={`${language === 'ar' ? 'mr-2 rotate-180' : 'ml-2'} w-5 h-5`} />
                 </Button>
               </Link>
               <Link to="/menu">
@@ -85,7 +85,7 @@ const HomePage = () => {
                   variant="outline"
                   className="bg-transparent text-white border-2 border-white hover:bg-white/10 rounded-full px-8 py-6 text-xl font-bebas tracking-wide"
                 >
-                  View Menu
+                  {t(translations.home.viewMenu.en, translations.home.viewMenu.ar)}
                 </Button>
               </Link>
             </div>
