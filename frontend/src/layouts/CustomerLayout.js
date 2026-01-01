@@ -29,7 +29,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <span className="font-bebas text-3xl text-[#c31c1c]" data-testid="nav-logo">BAM BURGERS</span>
+            <img src={LOGO_URL} alt="Bam Burgers" className="h-10 w-auto" />
+            <span className="font-bebas text-2xl text-[#c31c1c] hidden sm:block" data-testid="nav-logo">BAM BURGERS</span>
           </Link>
 
           {/* Desktop Nav */}
