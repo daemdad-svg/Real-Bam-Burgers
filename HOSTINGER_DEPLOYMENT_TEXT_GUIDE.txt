@@ -1,0 +1,627 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                   BAM BURGERS - HOSTINGER DEPLOYMENT GUIDE                    ║
+║                         Complete Step-by-Step Instructions                    ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+IMPORTANT: This application uses Python FastAPI + React which Hostinger Business
+Plan supports. Follow ALL steps carefully.
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 1: PREREQUISITES
+═══════════════════════════════════════════════════════════════════════════════
+
+☐ Hostinger Business Plan (or higher) active subscription
+☐ Domain name configured (e.g., bamburgers.com)
+☐ Application code downloaded from Emergent
+☐ MongoDB Atlas account (free tier is sufficient)
+☐ Supabase credentials ready
+☐ Computer with terminal/command line access
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 2: SETUP MONGODB ATLAS (DATABASE)
+═══════════════════════════════════════════════════════════════════════════════
+
+Hostinger doesn't provide MongoDB, so we use MongoDB Atlas (free):
+
+STEP 1: Create MongoDB Atlas Account
+────────────────────────────────────
+1. Go to: https://www.mongodb.com/cloud/atlas
+2. Click "Try Free"
+3. Sign up with email or Google
+4. Verify your email
+
+STEP 2: Create a Cluster
+────────────────────────────────────
+1. Choose "Build a Database"
+2. Select "M0 FREE" cluster (0.5 GB storage - sufficient for starting)
+3. Choose cloud provider: AWS
+4. Choose region: Middle East (Bahrain) or closest to Kuwait
+5. Cluster Name: "bam-burgers-cluster"
+6. Click "Create"
+7. Wait 2-3 minutes for cluster creation
+
+STEP 3: Create Database User
+────────────────────────────────────
+1. Click "Database Access" in left menu
+2. Click "+ ADD NEW DATABASE USER"
+3. Authentication Method: Password
+4. Username: bamburgers_admin
+5. Password: (Click "Autogenerate Secure Password" - SAVE THIS PASSWORD!)
+6. Database User Privileges: "Read and write to any database"
+7. Click "Add User"
+
+STEP 4: Configure Network Access
+────────────────────────────────────
+1. Click "Network Access" in left menu
+2. Click "+ ADD IP ADDRESS"
+3. Click "ALLOW ACCESS FROM ANYWHERE" (for Hostinger compatibility)
+   - This adds 0.0.0.0/0
+4. Click "Confirm"
+
+STEP 5: Get Connection String
+────────────────────────────────────
+1. Click "Database" in left menu
+2. Find your cluster, click "Connect"
+3. Choose "Connect your application"
+4. Driver: Python, Version: 3.6 or later
+5. Copy the connection string (looks like):
+   mongodb+srv://bamburgers_admin:<password>@bam-burgers-cluster.xxxxx.mongodb.net/
+6. IMPORTANT: Replace <password> with your actual password from Step 3
+7. Add database name at the end: /bam_burgers
+8. Final string should look like:
+   mongodb+srv://bamburgers_admin:YourPassword123@bam-burgers-cluster.xxxxx.mongodb.net/bam_burgers
+
+SAVE THIS CONNECTION STRING - You'll need it later!
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 3: PREPARE YOUR APPLICATION LOCALLY
+═══════════════════════════════════════════════════════════════════════════════
+
+STEP 1: Extract Downloaded Code
+────────────────────────────────────
+1. Download code from Emergent (Download Code button)
+2. Extract the .zip file
+3. You should see folders: backend/ and frontend/
+
+STEP 2: Update Backend Environment Variables
+────────────────────────────────────
+1. Open backend/.env file in text editor
+2. Update these lines:
+   
+   MONGO_URL=mongodb+srv://bamburgers_admin:YourPassword@bam-burgers-cluster.xxxxx.mongodb.net/bam_burgers
+   DB_NAME=bam_burgers
+   CORS_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+   
+   (Replace with your actual MongoDB connection string and domain)
+
+3. Keep these as is (your Supabase credentials):
+   SUPABASE_URL=https://sqhjsctsxlnivcbeclrn.supabase.co
+   SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+   SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+   SUPABASE_JWT_SECRET=1ZDGhOVBN2HtWcKJXpkdi5/h/y1z8RUZ...
+
+4. Save the file
+
+STEP 3: Build Frontend for Production
+────────────────────────────────────
+1. Open terminal/command prompt
+2. Navigate to frontend folder:
+   cd frontend
+
+3. Update frontend/.env:
+   REACT_APP_BACKEND_URL=https://yourdomain.com/api
+   REACT_APP_SUPABASE_URL=https://sqhjsctsxlnivcbeclrn.supabase.co
+   REACT_APP_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+   
+   (Replace yourdomain.com with your actual domain)
+
+4. Install dependencies:
+   yarn install
+   (If you don't have yarn: npm install -g yarn first)
+
+5. Build production version:
+   yarn build
+
+6. Wait for build to complete (2-5 minutes)
+7. You'll see a "build/" folder created
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 4: ACCESS HOSTINGER CONTROL PANEL
+═══════════════════════════════════════════════════════════════════════════════
+
+STEP 1: Login to Hostinger
+────────────────────────────────────
+1. Go to: https://hpanel.hostinger.com
+2. Login with your Hostinger account
+3. You'll see hPanel dashboard
+
+STEP 2: Locate Your Website
+────────────────────────────────────
+1. In hPanel, find "Websites" section
+2. Click on your domain (bamburgers.com)
+3. You'll see website management options
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 5: DEPLOY BACKEND (PYTHON/FASTAPI)
+═══════════════════════════════════════════════════════════════════════════════
+
+STEP 1: Enable SSH Access
+────────────────────────────────────
+1. In hPanel, go to "Advanced" → "SSH Access"
+2. Click "Enable SSH"
+3. Note down:
+   - SSH Username: (e.g., u123456789)
+   - SSH Host: (e.g., ssh.hostinger.com)
+   - SSH Port: 65002 (usually)
+
+STEP 2: Connect via SSH
+────────────────────────────────────
+OPTION A - Using PuTTY (Windows):
+1. Download PuTTY from: https://www.putty.org/
+2. Open PuTTY
+3. Host Name: ssh.hostinger.com
+4. Port: 65002
+5. Connection Type: SSH
+6. Click "Open"
+7. Login with username from Step 1
+8. Enter password (from hPanel → SSH Access)
+
+OPTION B - Using Terminal (Mac/Linux):
+1. Open Terminal
+2. Run: ssh u123456789@ssh.hostinger.com -p 65002
+3. Enter password when prompted
+
+STEP 3: Setup Backend Directory
+────────────────────────────────────
+Once connected via SSH, run these commands:
+
+1. Navigate to home directory:
+   cd ~
+
+2. Go to public_html:
+   cd public_html
+
+3. Create api directory:
+   mkdir api
+   cd api
+
+STEP 4: Upload Backend Files
+────────────────────────────────────
+You have two options:
+
+OPTION A - Using File Manager (Easier):
+1. In hPanel, go to "Files" → "File Manager"
+2. Navigate to: public_html/api/
+3. Click "Upload Files"
+4. Upload ALL files from your backend/ folder:
+   - server.py
+   - requirements.txt
+   - .env
+   - (all other backend files)
+
+OPTION B - Using FTP:
+1. In hPanel, go to "Files" → "FTP Accounts"
+2. Get FTP credentials
+3. Use FileZilla (download from filezilla-project.org)
+4. Connect to your server
+5. Upload backend/ files to public_html/api/
+
+STEP 5: Install Python Dependencies
+────────────────────────────────────
+Back in SSH terminal:
+
+1. Navigate to api directory:
+   cd ~/public_html/api
+
+2. Create virtual environment:
+   python3 -m venv venv
+
+3. Activate virtual environment:
+   source venv/bin/activate
+
+4. Upgrade pip:
+   pip install --upgrade pip
+
+5. Install requirements:
+   pip install -r requirements.txt
+
+6. This will take 3-5 minutes. Wait for completion.
+
+STEP 6: Configure Python Application in hPanel
+────────────────────────────────────
+1. In hPanel, go to "Advanced" → "Python App"
+2. Click "Create Application"
+3. Fill in:
+   - Python Version: 3.11 or latest available
+   - Application Root: /public_html/api
+   - Application URL: yourdomain.com/api
+   - Application Startup File: server.py
+   - Application Entry Point: app
+   - Passenger Log File: Enabled
+
+4. Click "Create"
+5. Wait for setup (1-2 minutes)
+
+STEP 7: Configure Passenger WSGI
+────────────────────────────────────
+Create a file named "passenger_wsgi.py" in public_html/api/:
+
+1. Via File Manager:
+   - Go to public_html/api/
+   - Click "New File"
+   - Name it: passenger_wsgi.py
+
+2. Add this content:
+
+import sys
+import os
+
+INTERP = "/home/u123456789/public_html/api/venv/bin/python3"
+if sys.executable != INTERP:
+    os.execl(INTERP, INTERP, *sys.argv)
+
+sys.path.insert(0, os.path.dirname(__file__))
+
+from server import app as application
+
+3. Replace u123456789 with your actual SSH username
+4. Save the file
+
+STEP 8: Create .htaccess for API
+────────────────────────────────────
+Create .htaccess file in public_html/api/:
+
+PassengerEnabled On
+PassengerPython /home/u123456789/public_html/api/venv/bin/python3
+
+RewriteEngine On
+RewriteBase /api/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ passenger_wsgi.py/$1 [QSA,L]
+
+Replace u123456789 with your username.
+
+STEP 9: Test Backend
+────────────────────────────────────
+1. Open browser
+2. Go to: https://yourdomain.com/api/health
+3. You should see: {"status":"healthy","timestamp":"..."}
+4. If you see this, backend is working! ✓
+
+If not working:
+- Check: hPanel → Advanced → Error Logs
+- Verify .env file has correct MongoDB connection string
+- Restart application in hPanel → Python App → Restart
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 6: DEPLOY FRONTEND (REACT)
+═══════════════════════════════════════════════════════════════════════════════
+
+STEP 1: Upload Frontend Build Files
+────────────────────────────────────
+1. In hPanel, go to "Files" → "File Manager"
+2. Navigate to: public_html/
+3. DELETE the default index.html if it exists
+4. Go to your local computer's frontend/build/ folder
+5. Upload ALL contents (not the build folder itself) to public_html/:
+   - index.html
+   - asset-manifest.json
+   - favicon.ico
+   - manifest.json
+   - robots.txt
+   - static/ folder (entire folder)
+
+6. Wait for upload to complete
+
+STEP 2: Create .htaccess for React Router
+────────────────────────────────────
+Create .htaccess in public_html/ (NOT in api folder):
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # Don't rewrite files or directories
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  
+  # Don't rewrite API requests
+  RewriteCond %{REQUEST_URI} !^/api
+  
+  # Rewrite everything else to index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Enable Gzip compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Browser caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+STEP 3: Verify Frontend
+────────────────────────────────────
+1. Open browser
+2. Go to: https://yourdomain.com
+3. You should see the BAM Burgers homepage!
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 7: ENABLE SSL CERTIFICATE (HTTPS)
+═══════════════════════════════════════════════════════════════════════════════
+
+STEP 1: Activate SSL
+────────────────────────────────────
+1. In hPanel, go to "Security" → "SSL"
+2. Find your domain
+3. Click "Install SSL"
+4. Hostinger provides free Let's Encrypt SSL
+5. Wait 2-5 minutes for activation
+
+STEP 2: Force HTTPS
+────────────────────────────────────
+Add to the TOP of your public_html/.htaccess:
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+Now all traffic will use HTTPS!
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 8: FINAL TESTING
+═══════════════════════════════════════════════════════════════════════════════
+
+☐ Test 1: Homepage loads - https://yourdomain.com
+☐ Test 2: Menu page shows items from Supabase - https://yourdomain.com/menu
+☐ Test 3: API health check - https://yourdomain.com/api/health
+☐ Test 4: Language toggle works (click عربي button)
+☐ Test 5: Add items to cart
+☐ Test 6: Admin login - https://yourdomain.com/admin
+    Username: admin
+    Password: admin123
+☐ Test 7: Mobile responsive design
+☐ Test 8: Footer visible on all devices
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 9: SEED INITIAL DATA
+═══════════════════════════════════════════════════════════════════════════════
+
+The backend automatically seeds data on first API call.
+
+To manually trigger:
+1. Open browser
+2. Go to: https://yourdomain.com/api/seed
+3. You should see: "Initial data seeded"
+
+This creates:
+- Admin account (username: admin, password: admin123)
+- Sample coupon (WELCOME10)
+- Loyalty settings
+
+IMPORTANT: Change admin password after first login!
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 10: TROUBLESHOOTING COMMON ISSUES
+═══════════════════════════════════════════════════════════════════════════════
+
+ISSUE 1: Backend showing 500 error
+──────────────────────────────────
+SOLUTION:
+1. Check error logs: hPanel → Advanced → Error Logs
+2. Verify MongoDB connection string in backend/.env
+3. Ensure all dependencies installed: pip install -r requirements.txt
+4. Restart Python app: hPanel → Python App → Restart
+
+ISSUE 2: Frontend shows blank page
+──────────────────────────────────
+SOLUTION:
+1. Check browser console (F12) for errors
+2. Verify REACT_APP_BACKEND_URL in .env matches your domain
+3. Clear browser cache (Ctrl+Shift+R)
+4. Check .htaccess rules in public_html/
+
+ISSUE 3: CORS errors
+──────────────────────────────────
+SOLUTION:
+1. Update backend/.env:
+   CORS_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+2. Restart backend
+3. Clear browser cache
+
+ISSUE 4: Menu items not loading
+──────────────────────────────────
+SOLUTION:
+1. Verify Supabase credentials in backend/.env
+2. Check: https://yourdomain.com/api/menu/items
+3. Should return JSON with items
+4. If error, check Supabase dashboard for network settings
+
+ISSUE 5: MongoDB connection failed
+──────────────────────────────────
+SOLUTION:
+1. Verify MongoDB Atlas:
+   - IP whitelist includes 0.0.0.0/0
+   - Database user created with correct password
+   - Connection string has correct password
+2. Test connection string locally first
+3. Ensure /bam_burgers database name is appended
+
+ISSUE 6: Python application won't start
+──────────────────────────────────
+SOLUTION:
+1. Check Python version: python3 --version (should be 3.8+)
+2. Verify virtual environment activated
+3. Check passenger_wsgi.py has correct username path
+4. Verify .htaccess has correct paths
+5. Check error logs for specific error message
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 11: POST-DEPLOYMENT CHECKLIST
+═══════════════════════════════════════════════════════════════════════════════
+
+☐ Change default admin password
+☐ Test order creation flow completely
+☐ Verify email notifications (if configured)
+☐ Test payment gateways (when integrated)
+☐ Set up regular backups:
+   - MongoDB Atlas: Automatic backups enabled by default
+   - Hostinger: Use File Manager → Backup feature
+☐ Configure monitoring:
+   - Check hPanel Resource Usage regularly
+   - Monitor MongoDB Atlas metrics
+☐ Update integration settings in admin panel:
+   - Add MyFatoorah API key (if using)
+   - Add UPay credentials (if using)
+   - Add delivery partner API keys (if using)
+☐ Test all admin features:
+   - Create/edit coupons
+   - Update loyalty settings
+   - View customers
+   - Generate reports
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 12: DIRECTORY STRUCTURE ON SERVER
+═══════════════════════════════════════════════════════════════════════════════
+
+Your final server structure should look like:
+
+/home/u123456789/public_html/
+│
+├── index.html                  (React app entry)
+├── asset-manifest.json
+├── favicon.ico
+├── manifest.json
+├── robots.txt
+├── .htaccess                   (React router config)
+│
+├── static/                     (React build assets)
+│   ├── css/
+│   ├── js/
+│   └── media/
+│
+└── api/                        (FastAPI backend)
+    ├── server.py
+    ├── requirements.txt
+    ├── .env
+    ├── passenger_wsgi.py
+    ├── .htaccess
+    └── venv/                   (Python virtual environment)
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 13: MAINTENANCE & UPDATES
+═══════════════════════════════════════════════════════════════════════════════
+
+TO UPDATE FRONTEND:
+1. Make changes locally
+2. Run: yarn build
+3. Upload new build/ contents to public_html/
+4. Clear CDN cache if using one
+5. Test in browser (hard refresh: Ctrl+Shift+R)
+
+TO UPDATE BACKEND:
+1. Connect via SSH
+2. Navigate to: cd ~/public_html/api
+3. Activate venv: source venv/bin/activate
+4. Upload new server.py file
+5. If requirements changed: pip install -r requirements.txt
+6. Restart: hPanel → Python App → Restart
+
+TO UPDATE ENVIRONMENT VARIABLES:
+1. Edit .env files via File Manager
+2. Restart respective service
+3. Test immediately
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 14: PERFORMANCE OPTIMIZATION
+═══════════════════════════════════════════════════════════════════════════════
+
+STEP 1: Enable Cloudflare (Free CDN)
+────────────────────────────────────
+1. In hPanel, go to "Advanced" → "Cloudflare"
+2. Enable Cloudflare for your domain
+3. This provides:
+   - Free SSL
+   - DDoS protection
+   - CDN caching
+   - Performance boost
+
+STEP 2: Database Indexing
+────────────────────────────────────
+In MongoDB Atlas, create indexes:
+1. Go to your cluster
+2. Click "Collections"
+3. Select "bam_burgers" database
+4. For each collection, add indexes:
+   - orders: {status: 1, created_at: -1}
+   - items: {tenant_id: 1, status: 1}
+   - categories: {tenant_id: 1, sort_order: 1}
+
+STEP 3: Image Optimization
+────────────────────────────────────
+- Use WebP format for images
+- Compress images before upload (use tinypng.com)
+- Consider CDN for menu images (Cloudinary, ImageKit)
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 15: SECURITY BEST PRACTICES
+═══════════════════════════════════════════════════════════════════════════════
+
+☐ SSL enabled (HTTPS everywhere)
+☐ MongoDB IP whitelist configured
+☐ Strong database passwords
+☐ Admin password changed from default
+☐ .env files not publicly accessible
+☐ Supabase RLS (Row Level Security) enabled
+☐ Regular backups scheduled
+☐ Keep dependencies updated
+☐ Monitor access logs regularly
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 16: SUPPORT RESOURCES
+═══════════════════════════════════════════════════════════════════════════════
+
+Hostinger Support:
+- Live Chat: Available 24/7 in hPanel
+- Knowledge Base: https://support.hostinger.com
+- Tutorials: https://support.hostinger.com/en/collections/1578566-tutorials
+
+MongoDB Atlas:
+- Documentation: https://docs.atlas.mongodb.com/
+- Support: https://support.mongodb.com/
+
+Application Issues:
+- Check /app/test_result.md on Emergent
+- Review error logs in hPanel
+- Test APIs using Postman or browser
+
+═══════════════════════════════════════════════════════════════════════════════
+✓ DEPLOYMENT COMPLETE
+═══════════════════════════════════════════════════════════════════════════════
+
+Your BAM Burgers application should now be live at: https://yourdomain.com
+
+Admin panel: https://yourdomain.com/admin
+Login: admin / admin123 (CHANGE THIS IMMEDIATELY!)
+
+Remember to:
+1. Change admin password
+2. Add actual payment gateway credentials in admin settings
+3. Test all features thoroughly
+4. Monitor performance and errors
+5. Set up regular backups
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Questions or issues? Contact Hostinger support or refer to this guide.
+
+Good luck with your restaurant system! 🍔
