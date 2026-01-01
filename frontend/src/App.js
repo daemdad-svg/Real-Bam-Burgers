@@ -28,6 +28,9 @@ import KDSPage from "./pages/admin/KDSPage";
 import MenuManagementPage from "./pages/admin/MenuManagementPage";
 import ReportsPage from "./pages/admin/ReportsPage";
 import CouponsPage from "./pages/admin/CouponsPage";
+import LoyaltySettingsPage from "./pages/admin/LoyaltySettingsPage";
+import CustomersPage from "./pages/admin/CustomersPage";
+import SettingsPage from "./pages/admin/SettingsPage";
 
 // API
 import { seedAPI } from "./lib/api";
