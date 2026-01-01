@@ -32,19 +32,19 @@ export const AdminLayout = ({ children }) => {
   return (
     <div className="admin-layout flex min-h-screen admin-theme">
       {/* Sidebar */}
-      <aside className={`admin-sidebar fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 lg:translate-x-0 ${
+      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#c31c1c] text-white transform transition-transform duration-300 lg:translate-x-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="p-4 border-b border-white/10">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[#d4af37] rounded-lg flex items-center justify-center">
-                <span className="font-bebas text-[#1e3a5f] text-lg">RP</span>
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                <span className="font-bebas text-[#c31c1c] text-lg">RP</span>
               </div>
               <div>
                 <h1 className="font-bebas text-xl text-white">RIWA POS</h1>
-                <p className="text-xs text-[#d4af37]">Bam Burgers</p>
+                <p className="text-xs text-white/70">Bam Burgers</p>
               </div>
             </div>
           </div>
