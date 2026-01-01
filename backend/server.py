@@ -1328,8 +1328,8 @@ async def seed_initial_data():
             min_order_amount=5.0,
             max_discount=2.0,
             usage_limit=100,
-            valid_from=datetime.now(timezone.utc),
-            valid_until=datetime(2025, 12, 31, tzinfo=timezone.utc),
+            valid_from=datetime.now(timezone.utc) - timedelta(days=1),
+            valid_until=datetime(2027, 12, 31, tzinfo=timezone.utc),
             is_active=True
         )
         coupon_dict = coupon.model_dump()
