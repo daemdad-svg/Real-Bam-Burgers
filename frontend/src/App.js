@@ -142,10 +142,7 @@ const AdminRoutes = () => {
         element={
           <AdminProtectedRoute>
             <AdminLayout>
-              <div className="p-6">
-                <h1 className="font-bebas text-4xl text-[#1e3a5f] mb-4">Loyalty Settings</h1>
-                <p className="text-slate-500">Loyalty program settings coming soon...</p>
-              </div>
+              <LoyaltySettingsPage />
             </AdminLayout>
           </AdminProtectedRoute>
         }
@@ -155,10 +152,7 @@ const AdminRoutes = () => {
         element={
           <AdminProtectedRoute>
             <AdminLayout>
-              <div className="p-6">
-                <h1 className="font-bebas text-4xl text-[#1e3a5f] mb-4">Customers</h1>
-                <p className="text-slate-500">Customer management coming soon...</p>
-              </div>
+              <CustomersPage />
             </AdminLayout>
           </AdminProtectedRoute>
         }
@@ -168,10 +162,7 @@ const AdminRoutes = () => {
         element={
           <AdminProtectedRoute>
             <AdminLayout>
-              <div className="p-6">
-                <h1 className="font-bebas text-4xl text-[#1e3a5f] mb-4">Settings</h1>
-                <p className="text-slate-500">Integration settings coming soon...</p>
-              </div>
+              <SettingsPage />
             </AdminLayout>
           </AdminProtectedRoute>
         }
