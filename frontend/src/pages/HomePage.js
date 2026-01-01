@@ -194,18 +194,18 @@ const HomePage = () => {
             {[
               {
                 icon: Truck,
-                title: 'Fast Delivery',
-                description: 'Hot and fresh food delivered to your doorstep in 30 minutes or less'
+                title: t(translations.home.fastDelivery.en, translations.home.fastDelivery.ar),
+                description: t(translations.home.fastDeliveryDesc.en, translations.home.fastDeliveryDesc.ar)
               },
               {
                 icon: Star,
-                title: 'Best Quality',
-                description: 'Premium ingredients and recipes crafted to perfection by our chefs'
+                title: t(translations.home.bestQuality.en, translations.home.bestQuality.ar),
+                description: t(translations.home.bestQualityDesc.en, translations.home.bestQualityDesc.ar)
               },
               {
                 icon: Clock,
-                title: 'Open Late',
-                description: "Craving food at night? We're open until 1 AM daily"
+                title: t(translations.home.openLate.en, translations.home.openLate.ar),
+                description: t(translations.home.openLateDesc.en, translations.home.openLateDesc.ar)
               }
             ].map((feature, index) => (
               <motion.div
@@ -219,7 +219,7 @@ const HomePage = () => {
                 <div className="w-16 h-16 bg-[#faf2f1] rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <feature.icon className="w-8 h-8 text-[#c31c1c]" />
                 </div>
-                <h3 className="font-bebas text-2xl text-[#1e3a5f] mb-2">{feature.title}</h3>
+                <h3 className="font-bebas text-2xl text-[#c31c1c] mb-2">{feature.title}</h3>
                 <p className="text-slate-600">{feature.description}</p>
               </motion.div>
             ))}
