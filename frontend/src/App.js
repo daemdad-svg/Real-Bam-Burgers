@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { AdminAuthProvider, useAdminAuth } from "./context/AdminAuthContext";
+import { LanguageProvider } from "./context/LanguageContext";
 
 // Layouts
 import { CustomerLayout } from "./layouts/CustomerLayout";
