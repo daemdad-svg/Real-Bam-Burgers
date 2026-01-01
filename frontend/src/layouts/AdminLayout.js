@@ -4,7 +4,7 @@ import {
   Tag, Gift, Users, BarChart3, Settings, LogOut, Printer, Menu, X
 } from 'lucide-react';
 import { useState } from 'react';
-import { useAdminAuth } from '../context/AdminAuthContext';
+import { useAdminAuth } from '@/context/AdminAuthContext';
 
 export const AdminLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

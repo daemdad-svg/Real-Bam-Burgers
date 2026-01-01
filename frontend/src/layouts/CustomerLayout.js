@@ -1,9 +1,9 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Home, UtensilsCrossed, ShoppingBag, Gift, User, Menu, X, Phone } from 'lucide-react';
 import { useState } from 'react';
-import { Button } from '../components/ui/button';
-import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext';
+import { Button } from '@/components/ui/button';
+import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 
 export const CustomerLayout = ({ children }) => {
   return (
