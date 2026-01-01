@@ -115,6 +115,8 @@ export const reportAPI = {
 export const settingsAPI = {
   getIntegrations: () => api.get('/settings/integrations'),
   updateIntegrations: (data) => api.put('/settings/integrations', data),
+  getBusiness: () => api.get('/settings/business'),
+  updateBusiness: (data) => api.put('/settings/business', data),
 };
 
 // Seed API
