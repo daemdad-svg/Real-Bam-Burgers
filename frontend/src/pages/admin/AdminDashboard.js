@@ -4,8 +4,8 @@ import {
   Bell, Clock, Check, ChefHat, Truck, Package, X, 
   Phone, MapPin, User, CreditCard, Banknote, AlertTriangle
 } from 'lucide-react';
-import { Button } from '../../components/ui/button';
-import { orderAPI } from '../../lib/api';
+import { Button } from '@/components/ui/button';
+import { orderAPI } from '@/lib/api';
 import { toast } from 'sonner';
 
 // Buzzer sound URL (5 second alert)

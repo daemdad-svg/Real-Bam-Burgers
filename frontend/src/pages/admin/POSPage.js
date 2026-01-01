@@ -4,11 +4,11 @@ import {
   Plus, Search, ShoppingCart, Trash2, User, Phone, 
   CreditCard, Banknote, Truck, Store, Minus, X
 } from 'lucide-react';
-import { Button } from '../../components/ui/button';
-import { Input } from '../../components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../../components/ui/dialog';
-import { menuAPI, orderAPI, branchAPI } from '../../lib/api';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { menuAPI, orderAPI, branchAPI } from '@/lib/api';
 import { toast } from 'sonner';
 
 const POSPage = () => {

@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, Check, ChefHat, AlertTriangle } from 'lucide-react';
-import { Button } from '../../components/ui/button';
-import { orderAPI } from '../../lib/api';
+import { Button } from '@/components/ui/button';
+import { orderAPI } from '@/lib/api';
 import { toast } from 'sonner';
 
 const KDSPage = () => {

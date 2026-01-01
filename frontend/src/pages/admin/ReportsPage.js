@@ -4,10 +4,10 @@ import {
   TrendingUp, TrendingDown, DollarSign, ShoppingBag, 
   Users, Calendar, Download, Filter
 } from 'lucide-react';
-import { Button } from '../../components/ui/button';
-import { Input } from '../../components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
-import { reportAPI } from '../../lib/api';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { reportAPI } from '@/lib/api';
 import { toast } from 'sonner';
 
 const ReportsPage = () => {
