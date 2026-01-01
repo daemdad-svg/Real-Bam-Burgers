@@ -295,8 +295,15 @@ async def require_admin(credentials: HTTPAuthorizationCredentials = Depends(secu
     if not user:
         raise HTTPException(status_code=401, detail="Authentication required")
     
-    # Check if user is admin in MongoDB
+    # Check if user has admin or cashier role from token
+    if user.get("role") in ["admin", "cashier", "super_admin"]:
+        return user
+    
+    # Fallback: Check if user is admin in MongoDB by user_id
     admin = await db.admins.find_one({"user_id": user.get("sub")}, {"_id": 0})
+    if not admin:
+        # Also check by id
+        admin = await db.admins.find_one({"id": user.get("sub")}, {"_id": 0})
     if not admin:
         raise HTTPException(status_code=403, detail="Admin access required")
     return {**user, "admin": admin}
