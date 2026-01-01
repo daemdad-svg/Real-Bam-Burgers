@@ -34,6 +34,7 @@ export const CustomerLayout = ({ children }) => {
 const Navbar = () => {
   const { user, logout } = useAuth();
   const { itemCount } = useCart();
+  const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -48,14 +49,14 @@ const Navbar = () => {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
-            <Link to="/" className="text-[#1e3a5f] hover:text-[#c31c1c] font-medium transition-colors">
-              Home
+            <Link to="/" className="text-[#c31c1c] hover:text-[#a61818] font-medium transition-colors">
+              {t('Home', 'الرئيسية')}
             </Link>
-            <Link to="/menu" className="text-[#1e3a5f] hover:text-[#c31c1c] font-medium transition-colors">
-              Menu
+            <Link to="/menu" className="text-[#c31c1c] hover:text-[#a61818] font-medium transition-colors">
+              {t('Menu', 'القائمة')}
             </Link>
-            <Link to="/loyalty" className="text-[#1e3a5f] hover:text-[#c31c1c] font-medium transition-colors">
-              Rewards
+            <Link to="/loyalty" className="text-[#c31c1c] hover:text-[#a61818] font-medium transition-colors">
+              {t('Rewards', 'المكافآت')}
             </Link>
           </div>
 
@@ -64,7 +65,7 @@ const Navbar = () => {
             {/* Cart */}
             <Link to="/cart" className="relative" data-testid="nav-cart">
               <Button variant="ghost" size="icon" className="relative">
-                <ShoppingBag className="w-5 h-5 text-[#1e3a5f]" />
+                <ShoppingBag className="w-5 h-5 text-[#c31c1c]" />
                 {itemCount > 0 && (
                   <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#c31c1c] text-white text-xs rounded-full flex items-center justify-center">
                     {itemCount}
@@ -78,7 +79,7 @@ const Navbar = () => {
               {user ? (
                 <div className="flex items-center gap-3">
                   <Link to="/profile">
-                    <Button variant="ghost" className="text-[#1e3a5f]">
+                    <Button variant="ghost" className="text-[#c31c1c]">
                       <User className="w-5 h-5 mr-2" />
                       {user.name?.split(' ')[0]}
                     </Button>
@@ -88,13 +89,13 @@ const Navbar = () => {
                     onClick={logout}
                     className="text-[#c31c1c] border-[#c31c1c]"
                   >
-                    Logout
+                    {t('Logout', 'تسجيل خروج')}
                   </Button>
                 </div>
               ) : (
                 <Link to="/login">
                   <Button className="bg-[#c31c1c] hover:bg-[#a61818] rounded-full" data-testid="nav-login">
-                    Log In
+                    {t('Log In', 'تسجيل دخول')}
                   </Button>
                 </Link>
               )}
@@ -117,33 +118,33 @@ const Navbar = () => {
           <div className="px-4 py-4 space-y-4">
             <Link 
               to="/" 
-              className="block text-[#1e3a5f] font-medium"
+              className="block text-[#c31c1c] font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Home
+              {t('Home', 'الرئيسية')}
             </Link>
             <Link 
               to="/menu" 
-              className="block text-[#1e3a5f] font-medium"
+              className="block text-[#c31c1c] font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Menu
+              {t('Menu', 'القائمة')}
             </Link>
             <Link 
               to="/loyalty" 
-              className="block text-[#1e3a5f] font-medium"
+              className="block text-[#c31c1c] font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Rewards
+              {t('Rewards', 'المكافآت')}
             </Link>
             {user ? (
               <>
                 <Link 
                   to="/profile" 
-                  className="block text-[#1e3a5f] font-medium"
+                  className="block text-[#c31c1c] font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Profile
+                  {t('Profile', 'الملف الشخصي')}
                 </Link>
                 <button 
                   onClick={() => {
@@ -152,7 +153,7 @@ const Navbar = () => {
                   }}
                   className="block text-[#c31c1c] font-medium"
                 >
-                  Logout
+                  {t('Logout', 'تسجيل خروج')}
                 </button>
               </>
             ) : (
@@ -161,7 +162,7 @@ const Navbar = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Button className="w-full bg-[#c31c1c] hover:bg-[#a61818] rounded-full">
-                  Log In
+                  {t('Log In', 'تسجيل دخول')}
                 </Button>
               </Link>
             )}
